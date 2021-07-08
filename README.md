@@ -1,9 +1,10 @@
 # dogecoin-node-setup
 
-## Setup 
+
+ ## Setup 
 The primary sources for the setup from official repository are given below :
 1) https://github.com/dogecoin/dogecoin/blob/master/doc/build-osx.md
-2) https://github.com/dogecoin/dogecoin/blob/master/doc/build-osx.md
+2) https://github.com/dogecoin/dogecoin/blob/master/doc/Building-Dogecoin-1.14-for-Mac.md
 
 # Errors during setup 
 Error related to berkley db version was fixed by referring to https://github.com/dogecoin/dogecoin/issues/1948 . Installed the version 5 from  https://github.com/fastcoin-project/homebrew-formulas .
@@ -87,12 +88,15 @@ The address returned  for receiving  funds is ```nWLC4XbD684F8ztr8os45tb4QN5vM2y
 OR 
 
 ```sh
-curl --user dogecoinrpc:dcb436fa3db12e0e8a05c219501c66c1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbalance", "params": ["minahil"] }' -H 'content-type: text/plain;' http://127.0.0.1:44555/
+curl --user dogecoinrpc:dcb436fa3db12e0e8a05c219501c66c1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddressesbyaccount", "params": ["minahil"] }' -H 'content-type: text/plain;' http://127.0.0.1:44555/
 ```
-It returns the balance of the required account in the result key-value pair.
+It returns the addresses of the required account in the result key-value pair.
 ```sh
 {
-    "result": 288.01000000,
+    "result": [
+        "neTTsGfaz7Go7bob6ouYtb4n3RRX3eJiTW",
+        "nji5zEavjzKRrJdCJmSHTiYFAESujMY3yA"
+    ],
     "error": null,
     "id": "curltest"
 }
@@ -120,11 +124,52 @@ In output the pubkey attribute specifies your public key
 }
 ```
 
+OR 
+
+```sh
+curl --user dogecoinrpc:dcb436fa3db12e0e8a05c219501c66c1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "validateaddress", "params": ["nWLC4XbD684F8ztr8os45tb4QN5vM2yovX"] }' -H 'content-type: text/plain;' http://127.0.0.1:44555/
+```
+It returns the publickey in the pubkey key-value pair.
+```sh
+{
+    "result": {
+        "isvalid": true,
+        "address": "nWLC4XbD684F8ztr8os45tb4QN5vM2yovX",
+        "scriptPubKey": "76a9141775146bb600bd58088988b4a457be2ec614141688ac",
+        "ismine": true,
+        "iswatchonly": false,
+        "isscript": false,
+        "pubkey": "03497fe2b6f51ba3b287d66c2dc221c9bff5109b3fceea35b0da868181f90004c1",
+        "iscompressed": true,
+        "account": "minahil's account",
+        "timestamp": 1625505794,
+        "hdkeypath": "m/0'/0'/8'",
+        "hdmasterkeyid": "a036af087dcb8a73b741dcce63943c996cb68b72"
+    },
+    "error": null,
+    "id": "curltest"
+}
+```
+
 # Get private key 
 ```sh
 ./src/dogecoin-cli -testnet dumpprivkey nWLC4XbD684F8ztr8os45tb4QN5vM2yovX
 ```
 The private key associated with given address is  provided as output. In this case private key is ```ckHwUGwTYcDUZ2zVi9HgorBHCUoqD1xUBGYvULrboQ6b4Vr9MqR2```
+
+OR 
+
+```sh
+curl --user dogecoinrpc:dcb436fa3db12e0e8a05c219501c66c1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "dumpprivkey", "params": ["nWLC4XbD684F8ztr8os45tb4QN5vM2yovX"] }' -H 'content-type: text/plain;' http://127.0.0.1:44555/
+```
+The private key associated with given address is  provided as output in result key-value pair.
+```sh 
+{
+    "result": "ckHwUGwTYcDUZ2zVi9HgorBHCUoqD1xUBGYvULrboQ6b4Vr9MqR2",
+    "error": null,
+    "id": "curltest"
+}
+```
 
 # Create and Send Raw Transaction
 In the first step a raw  transaction is created  by following command 
