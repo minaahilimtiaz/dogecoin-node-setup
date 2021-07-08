@@ -196,3 +196,9 @@ In the  final  step the raw  transaction is  sent
 ./src/dogecoin-cli -testnet sendrawtransaction 01000000013c02e712495b91f53f630281dafaf3f2701815b4fba4725446c95721601068c0000000006a47304402205d7a7f0c0f6c39a781aede0cc2cdfdd2a85fd5067b56c25538f122b1beb10c33022025dc77b83e9ae31bb8070eb7d3e7ae175c9525dc0b7041562a4e5f0fa643dc39012102213a7a9a3a97a241b17e7b2ca0026b9c0b48e0bfe553696746fb1ac4650183c6ffffffff01409a940c020000001976a9147096311efc9f506355118400fc3e1d83c7c1caba88ac00000000
 ```
 The transaction id is returned as the output ```f5ef49f9f604729191060a3ea4ad4b1bebe0553d8e3fd006e88f6e5a7392cbb```
+
+# Postman Collection Link 
+A link to postman collection is given below to try out the above requests. 
+```sh
+https://www.getpostman.com/collections/a7e24be6f4ec3ebc6e7a
+```
