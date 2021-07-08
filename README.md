@@ -28,7 +28,11 @@ The command is described here https://github.com/dogecoin/dogecoin/pull/169.
 ```sh
 ./src/dogecoin-cli -testnet getblockchaininfo
 ```
-The output is attached below: 
+OR 
+
+```sh
+curl --user dogecoinrpc:dcb436fa3db12e0e8a05c219501c66c1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockchaininfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:44555/
+```
 
 # Create account in wallet 
 ```sh
@@ -39,17 +43,60 @@ It returns the address of the account. The output address in this case given bel
 nWLC4XbD684F8ztr8os45tb4QN5vM2yovX
 ```
 
+OR
+
+```sh
+curl --user dogecoinrpc:dcb436fa3db12e0e8a05c219501c66c1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaccountaddress", "params": ["minahil"] }' -H 'content-type: text/plain;' http://127.0.0.1:44555/
+```
+It returns the address of the created account in the result key-value pair.
+```sh
+{
+    "result": "nji5zEavjzKRrJdCJmSHTiYFAESujMY3yA",
+    "error": null,
+    "id": "curltest"
+}
+```
+
+
 # Get balance 
 ```sh
 ./src/dogecoin-cli -testnet getbalance "Minahil's Wallet"
 ``` 
 For newly created the balance  will be ```0.00000000```. In this case  the  wallet was charged using testnet faucet so the output was ``` 100.00000000```
 
+OR
+
+```sh
+curl --user dogecoinrpc:dcb436fa3db12e0e8a05c219501c66c1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbalance", "params": ["minahil"] }' -H 'content-type: text/plain;' http://127.0.0.1:44555/
+```
+It returns the balance of the required account in the result key-value pair.
+```sh
+{
+    "result": 288.01000000,
+    "error": null,
+    "id": "curltest"
+}
+```
+
 # Get  address 
 ```sh
 ./src/dogecoin-cli -testnet getaccountaddress "Minahil's Wallet" 
 ```
 The address returned  for receiving  funds is ```nWLC4XbD684F8ztr8os45tb4QN5vM2yovX```
+
+OR 
+
+```sh
+curl --user dogecoinrpc:dcb436fa3db12e0e8a05c219501c66c1 --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbalance", "params": ["minahil"] }' -H 'content-type: text/plain;' http://127.0.0.1:44555/
+```
+It returns the balance of the required account in the result key-value pair.
+```sh
+{
+    "result": 288.01000000,
+    "error": null,
+    "id": "curltest"
+}
+```
 
 # Get public key  
 ```sh
